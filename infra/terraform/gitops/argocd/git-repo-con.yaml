@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: private-gitops-openpix
+  namespace: gitops
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  url: https://github.com/rafaelgrecco/open-pix
+  # password: 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
+  # username: not-used
