@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minio-tenant
+  namespace: gitops
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/rafaelgrecco/open-pix.git'
+    path: infra/src/helm-charts/minio-tenant
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+      namespace: deepstorage
+      server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
